@@ -4,6 +4,9 @@
 
 
 import { Routes, Route } from "react-router-dom"
+
+import Header from "./components/Header"
+
 import HomePage from "./Pages/HomePage"
 import Scoring from "./Pages/Scoring"
 
@@ -19,6 +22,7 @@ import Tomahawk from "./Pages/Tomahawk"
 function App() {
   return (
     <div>
+      <Header />
       <Routes>
         <Route path='/' element={ <HomePage />}></Route>
         <Route path='/Scoring' element={ <Scoring />}></Route>
