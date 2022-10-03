@@ -8,10 +8,10 @@ function Header() {
         <nav className="navbar">
           {/* <img id="logoPic" src={logo} alt="logo" /> */}
           <div className="navLinks">
-          <NavLink className={"link"} to="/">Home</NavLink> 
+          <NavLink className={"link"} to="/"><a>Home</a></NavLink> 
           </div>
           <div className="navLinks">
-          <NavLink className={"link"} to="/ContactMe">Contact Me</NavLink>
+          <NavLink className={"link"} to="/Login"><a>Login / Register </a></NavLink>
           </div>
         </nav>
 

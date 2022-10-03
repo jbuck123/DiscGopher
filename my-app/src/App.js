@@ -7,6 +7,8 @@ import { Routes, Route } from "react-router-dom"
 
 import Header from "./components/Header"
 
+import Login from "./Pages/Login"
+
 import HomePage from "./Pages/HomePage"
 import Scoring from "./Pages/Scoring"
 
@@ -32,6 +34,7 @@ function App() {
         <Route path='/Forehand' element={ <Forehand />}></Route>
         <Route path='/Backhand' element={ <Backhand />}></Route>
         <Route path='/Tomahawk' element={ <Tomahawk />}></Route>
+        <Route path='/Login' element={ <Login />}></Route>
       </Routes>
     </div>
   )

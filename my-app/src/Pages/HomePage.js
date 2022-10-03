@@ -13,9 +13,7 @@ export default function HomePage() {
         <h1 className="section-title"> DiscGopher</h1>
         <div className="flex-container">
           <div className="child-container">
-            <p className="section-content">
-              DiscGopher helps beginners be better Disc Golfers
-            </p>
+           <h3 className="section-content">A tool for Disc Golfers in Minnesota</h3>
             <div>
               <img className="section-image" src={Gopher}></img>
             </div>
@@ -103,7 +101,7 @@ export default function HomePage() {
         </div>
       </div>
       <div className="section-bg-armyGreen">
-        <h1 className="section-title"> Scoring </h1>
+        <h1 className="section-title"> Rules and Scoring </h1>
         <p className="section-content">
           for the most part, the socring terms for disc golf are the same as
           they are for ball golf.
