@@ -1,0 +1,34 @@
+GET http://localhost:3001/DiscGophers
+
+###
+
+
+GET http://localhost:3001/DiscGophers/633df10aa244f0f6b1e5a36a
+
+
+###
+
+
+POST http://localhost:3001/DiscGophers
+Content-Type: application/json
+
+{
+    "name": "James",
+    "password": "Password"
+}
+
+
+
+###
+
+DELETE http://localhost:3001/DiscGophers/633df10aa244f0f6b1e5a36a
+
+
+
+###
+PATCH  http://localhost:3001/DiscGophers/633df4a5704d9210286b281a
+Content-Type: application/json
+
+{
+    "name" : "Ryan"
+}
