@@ -1,5 +1,6 @@
 import React from "react"
-import { useRef, useState, useEffect } from " react ";
+import { NavLink } from "react-router-dom";
+import { useRef, useState, useEffect } from "react";
 import { faCheck, faTimes, faInfoCircle} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
@@ -60,12 +61,12 @@ export default function Register() {
         setErrMsg('')
     }, [user, pwd, matchPwd])
     return (
-     <section>
+     <section className="section-registration-login ">
          <p ref={errRef} className={errMsg ? "errmsg" :
                 // aria live is an accesibility tool for screen readers.
           "offscreen"} aria-live="assertive"> {errMsg}</p>
-          <h1>Register</h1>
-          <form>
+          <h1 className="section-title">Register</h1>
+          <form onSubmit={handleSubmit} className="section-content">
               <label htmlFor="username">
                   Username:
                   <span className={validName ? "valid" : "hide"}>
@@ -93,7 +94,81 @@ export default function Register() {
                   Must begin with a letter. <br /> 
                   Letters, numbers, underscores, hyphens allowed.
               </p>
+            {/* //password section */}
+            {/* {follows very similar logic } */}
+
+            <label htmlFor="password">
+                Password: 
+                {/* neeed to go back into my css and add the classes "valid" and "hide"  and "invalid"*/}
+                {/* logic behind this turnary is simple, if validPwd then give classname "valid",  */}
+                {/* if not then give the class name of "hide" which then hides the icon below */}
+
+                <span className={validPwd ? "valid" : "hide" }>
+                    <FontAwesomeIcon icon={faCheck} /> 
+                </span>
+                <span className={ validPwd || !pwd ? "hide" : "invalid"}>
+                    <FontAwesomeIcon icon={faTimes} /> 
+                </span>
+            </label>
+            <input
+            type="password"
+            id="password"
+            onChange={(e) => setPwd(e.target.value)}
+            required
+            aria-invalid = {validPwd ? "false" : "true"}
+            aria-describedby="pwdnote"
+            onFocus={() => setPwdFocus(true)}
+            onBlur={() => setPwdFocus(false)}>
+            </input>
+            <p id="pwdnote" className={pwdFocus && !validPwd ? "instructions" : "offscreen" }>
+                <FontAwesomeIcon icon={faInfoCircle} /> 
+                8 to 24 characters. <br />
+                Must include uppercase and lowercase letters, a number and a sepcial character. <br /> 
+                Allowed special characers: <span aria-label="exclamation mark"> ! </span>
+                <span aria-label="at symbol"> @ </span>
+                <span aria-label=" hashtag"> # </span>
+                <span aria-label="dollar sign">$</span>
+                <span aria-label="percent"> % </span>
+            </p>
+            <label htmlFor="confirm_pwd">
+                Confirm Password:
+                <span className={validMatch && matchPwd ? "valid" : "hide"}>
+                    <FontAwesomeIcon icon={faCheck} /> 
+                </span>
+                <span className={validMatch || !matchPwd ? "hide" : "invalid"}>
+                    <FontAwesomeIcon icon={faTimes} /> 
+                </span>
+            </label>
+            <input
+            type="password"
+            id="confirm_pwd"
+            onChange={(e) => setPwd(e.target.value)}
+            required
+            aria-invalid = {validMatch ? "false" : "true"}
+            aria-describedby="confirmnote"
+            onFocus={() => setMatchFocus(true)}
+            onBlur={() => setMatchFocus(false)}>
+            </input>
+            <p id="pwdnote" className={pwdFocus && !validPwd ? "instructions" : "offscreen" }>
+                <FontAwesomeIcon icon={faInfoCircle} /> 
+                Password must match.
+            </p>
+
+            {/* SUBMIT BUTTON */}
+            {/* cool turnary statement for the submit button */}
+
+            <button disabled={!validName || !validPwd || !validMatch ? true : false}>
+                Sign up !
+            </button>
           </form>
+          <p className="section-content">
+              Already registered? <br /> 
+              <span className="line">
+
+                  {/* need to go back and fix the way this line below works. */}
+              <NavLink className={"link"} to="/Login"><a className="btn">Login Here </a></NavLink>
+              </span>
+          </p>
      </section>
     )
 }

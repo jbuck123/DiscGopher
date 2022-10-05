@@ -8,6 +8,7 @@ import { Routes, Route } from "react-router-dom"
 import Header from "./components/Header"
 
 import Login from "./Pages/Login"
+import Register from "./Pages/Register"
 
 import HomePage from "./Pages/HomePage"
 import Scoring from "./Pages/Scoring"
@@ -35,6 +36,7 @@ function App() {
         <Route path='/Backhand' element={ <Backhand />}></Route>
         <Route path='/Tomahawk' element={ <Tomahawk />}></Route>
         <Route path='/Login' element={ <Login />}></Route>
+        <Route path='/Register' element={ <Register />}></Route>
       </Routes>
     </div>
   )
