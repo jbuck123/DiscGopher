@@ -1,18 +1,14 @@
 const express = require('express')
 
-const app = express()
+const PORT = process.env.PORT || 3001;
 
-const posts = [
-    {
-        username: 'Kyle',
-        title: "Post 1"
-    },{
-        username: "Jim",
-        title: 'post 2'
-    }
-]
+const app = express();
 
-app.get('/posts', (req, res) => { 
-res.json(posts)
+app.get("/api", (req, res) => {
+    res.json({message: "Hello from the backend Express!!"})
+// visit http://localhost:3001/api  to see message above
 })
-app.listen(3000)
+
+app.listen(PORT, () => {
+    console.log(` Server listening on ${PORT}`);
+});

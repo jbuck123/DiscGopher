@@ -16,7 +16,6 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "devStart": "nodemon server.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -40,7 +39,5 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "nodemon": "^2.0.20"
-  }
+  "proxy": "http://localhost:3001"
 }
