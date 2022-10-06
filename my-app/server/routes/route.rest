@@ -3,10 +3,26 @@ GET http://localhost:3001/DiscGophers
 ###
 
 
-GET http://localhost:3001/DiscGophers/633df10aa244f0f6b1e5a36a
+GET http://localhost:3001/DiscGophers/633df4a5704d9210286b281a
 
 
 ###
+// creating a new disc
+POST http://localhost:3001/DiscGophers/633df4a5704d9210286b281a/disc
+Content-Type: application/json
+
+{
+    "name": "Wraith"
+}
+
+
+//updating new disc
+
+
+
+
+###
+
 
 
 POST http://localhost:3001/DiscGophers

@@ -1,4 +1,5 @@
 const express = require("express");
+const Disc = require("../models/Disc");
 const router = express.Router();
 const DiscGopher = require("../models/DiscGopher");
 
@@ -61,6 +62,57 @@ router.delete("/:id", getDiscGopher, async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+
+
+// creating discs
+router.post('/:id/disc', async (req, res) => {
+  // find out which post you are commenting on
+  const id = req.params.id;
+  // get the name of the disc and post id
+  const disc = new Disc({
+    name: req.body.name,
+    DiscGopher: id
+  })
+  try {
+    
+    await disc.save();
+    // find the DiscGopher using findbyId
+    const relatedUser = await DiscGopher.findById(id);
+    // push new disc into array
+    relatedUser.discs.push(disc);
+    await relatedUser.save()
+    res.json(relatedUser)
+
+  } catch (error) { 
+    res.status(500).json({ message: error.message })
+    
+  }
+ 
+
+})
+
+//updating a users disc
+// Updating one
+router.patch("/:id/disc", getDiscGopher, async (req, res) => {
+  if (req.body.name != null) {
+      res.discGohper.name = req.body.name
+  }
+  if (req.body.password != null) {
+      res.discGohper.password = req.body.password
+  }
+
+  try {
+      const updatedDiscGopher = await res.discGohper.save()
+      res.json(updatedDiscGopher)
+  } catch (error) {
+      res.status(400).json({ message: error.message })
+  }
+})
+
+
+
+
+
 
 // this is middleware
 // I can use this function for getting, updating and deleting DISCgophers
