@@ -1,5 +1,5 @@
 
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 
 
 
@@ -7,6 +7,7 @@ import React, {useState} from 'react'
 export default function Profile() {
 
     const [nameData, setNameData] = useState([]);
+    const [discData, setDiscData] = useState([])
   
 
 
@@ -15,17 +16,25 @@ export default function Profile() {
               .then((res) => res.json())
               .then((data) => {
                 setNameData(data[0].name);
-                console.log(data[0].name);
+                setDiscData(data[0].discs)
+                console.log(data[0].discs);
               });
           };
     
-        grabData();
+        useEffect(grabData, [])
     
     return(
-        <div> 
-            <h1>
+        <div className='section-bg-armyGreen'> 
+            <h1 className='section-title'>
                 {nameData}
             </h1>
+            <div className='section-content'>
+                {discData.map((disc, index) => {
+                    return ( <div key={index}>
+                        <p>{disc}</p>
+                    </div> );
+                })}
+            </div>
         </div>
     )
   } 
