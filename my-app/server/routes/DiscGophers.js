@@ -1,7 +1,7 @@
 const express = require("express");
-const Disc = require("../models/Disc");
+
 const router = express.Router();
-const DiscGopher = require("../models/DiscGopher");
+const {Disc, DiscGopher} = require("../models/DiscGopher");
 
 // Getting all
 router.get("/", async (req, res) => {
@@ -13,10 +13,45 @@ router.get("/", async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
-// Getting one
-router.get("/:id", getDiscGopher, (req, res) => {
-  res.send(res.discGohper);
+
+router.get("/test", async (req, res) => {
+res.send("fuck this routing shit")
 });
+
+
+router.get("/disc", async (req, res) => {
+  disc = await Disc.find()
+  console.log(disc)
+  res.json(disc)
+})
+
+// Getting all discs
+// not working
+
+
+
+
+
+// Getting one user and disc
+router.get("/:id", async (req, res) => {
+  DiscGopher.findOne({_id: req.params.id})
+  .populate("discs") 
+  .then(discGopher => {
+    res.json(discGopher)
+  })
+ 
+});
+
+
+
+// // disc 
+// router.get("/:id/disc/id", getDisc, (req, res) => {
+//   res.send(res.disc)
+// } )
+
+
+
+
 // creating one
 router.post("/", async (req, res) => {
   const discGohper = new DiscGopher({
@@ -33,7 +68,7 @@ router.post("/", async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 });
-// Updating one
+// Updating user and disc
 router.patch("/:id", getDiscGopher, async (req, res) => {
     if (req.body.name != null) {
         res.discGohper.name = req.body.name
@@ -50,6 +85,9 @@ router.patch("/:id", getDiscGopher, async (req, res) => {
     }
 });
 
+// disc 
+router.patch("/:id")
+
 
 
 
@@ -64,7 +102,39 @@ router.delete("/:id", getDiscGopher, async (req, res) => {
 });
 
 
-// creating discs
+
+///
+//// FIND ONE DISC
+///
+router.get("/disc/:id", async ( req, res) => {
+try {
+  const id = req.params.id
+  console.log(id)
+  const disc = await Disc.findById(id)
+  console.log(disc)
+res.send(disc)
+} catch (error) {
+  
+}
+})
+
+
+
+////
+// Deleting Discs
+////
+router.delete("/disc/:id", async (req, res) => {
+  // get of the user from the params 
+  const id = req.params.id
+  const disc = await Disc.findByIdAndDelete(id)
+  res.send("deleted disc")
+})
+
+////
+// CREATING DISCS 
+////
+
+
 router.post('/:id/disc', async (req, res) => {
   // find out which post you are commenting on
   const id = req.params.id;
@@ -77,7 +147,7 @@ router.post('/:id/disc', async (req, res) => {
     
     await disc.save();
     // find the DiscGopher using findbyId
-    const relatedUser = await DiscGopher.findById(id);
+    const relatedUser = await DiscGopher.findById(id).populate("discs");;
     // push new disc into array
     relatedUser.discs.push(disc);
     await relatedUser.save()
@@ -87,27 +157,16 @@ router.post('/:id/disc', async (req, res) => {
     res.status(500).json({ message: error.message })
     
   }
+
+
+  ////
+// DELETING DISCS
+////
  
 
 })
 
-//updating a users disc
-// Updating one
-router.patch("/:id/disc", getDiscGopher, async (req, res) => {
-  if (req.body.name != null) {
-      res.discGohper.name = req.body.name
-  }
-  if (req.body.password != null) {
-      res.discGohper.password = req.body.password
-  }
 
-  try {
-      const updatedDiscGopher = await res.discGohper.save()
-      res.json(updatedDiscGopher)
-  } catch (error) {
-      res.status(400).json({ message: error.message })
-  }
-})
 
 
 
@@ -117,18 +176,34 @@ router.patch("/:id/disc", getDiscGopher, async (req, res) => {
 // this is middleware
 // I can use this function for getting, updating and deleting DISCgophers
 async function getDiscGopher(req, res, next) {
-  let discGohper;
+  let discGopher;
   try {
-    discGohper = await DiscGopher.findById(req.params.id);
-    if (discGohper == null) {
+    discGopher = await DiscGopher.findById(req.params.id);
+    
+    if (discGopher == null) {
       // a 404 error means that you cannot find something
       return res.status(404).json({ message: "cannot find DiscGopher" });
     }
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
-  res.discGohper = discGohper;
+  res.discGopher = discGopher;
   next();
 }
+// function to get, update, and delete discs
+
+// async function getDisc(req, res, next) {
+//   let disc;
+//   try {
+//     disc = await Disc.findById(req.params.id);
+//     if(discGohper == null) {
+//       return res.status(404).json({ message: "cannot find Disc "})
+//     }
+//   } catch (error) {
+//     return res.status(500).json({ message: error.message})
+//   }
+//   res.disc = disc;
+//   next();
+// }ç
 
 module.exports = router;

@@ -12,11 +12,34 @@ POST http://localhost:3001/DiscGophers/633df4a5704d9210286b281a/disc
 Content-Type: application/json
 
 {
-    "name": "Wraith"
+    "name": "Eagle"
 }
 
 
-//updating new disc
+
+###
+//DELETING A DISC
+DELETE http://localhost:3001/DiscGophers/disc/633f6e473707c88d48f951de
+
+
+### 
+// GETTING ONE DISC
+
+GET  http://localhost:3001/DiscGophers/disc/633f54e51c24e10c499a50b7
+
+
+
+###
+// get all discs
+
+GET http://localhost:3001/DiscGophers/disc
+
+
+###
+
+
+//getting one disc
+GET http://localhost:3001/DiscGophers/disc/633f6e473707c88d48f951de
 
 
 

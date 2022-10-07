@@ -14,8 +14,10 @@ const app = express();
 app.use(express.json())
 
 const UserRouter = require("./routes/DiscGophers")
+
 app.use('/DiscGophers', UserRouter)
 // localhost:3001/DiscGophers
+
 
 app.listen(PORT, () => {
     console.log(` Server listening on ${PORT}`);
