@@ -9,6 +9,7 @@ import Header from "./components/Header"
 
 import Login from "./Pages/Login"
 import Register from "./Pages/Register"
+import Profile from "./Pages/Profile"
 
 import HomePage from "./Pages/HomePage"
 import Scoring from "./Pages/Scoring"
@@ -37,6 +38,7 @@ function App() {
         <Route path='/Tomahawk' element={ <Tomahawk />}></Route>
         <Route path='/Login' element={ <Login />}></Route>
         <Route path='/Register' element={ <Register />}></Route>
+        <Route path= '/Profile' element={ <Profile /> }></Route>
       </Routes>
     </div>
   )
