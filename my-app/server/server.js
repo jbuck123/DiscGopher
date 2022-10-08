@@ -13,10 +13,10 @@ const app = express();
 
 app.use(express.json())
 
-const UserRouter = require("./routes/DiscGophers")
+const UserRouter = require("./routes/login")
 
-app.use('/DiscGophers', UserRouter)
-// localhost:3001/DiscGophers
+app.use('/users', UserRouter)
+// localhost:3001/users
 
 
 app.listen(PORT, () => {
