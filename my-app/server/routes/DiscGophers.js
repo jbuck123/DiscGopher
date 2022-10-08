@@ -6,7 +6,7 @@ const {Disc, DiscGopher} = require("../models/DiscGopher");
 // Getting all
 router.get("/", async (req, res) => {
   try {
-    const discGohpers = await DiscGopher.find();
+    const discGohpers = await DiscGopher.find().populate('discs');
     res.json(discGohpers);
   } catch (err) {
     // all 500 errors are server related and not user related / front end issues

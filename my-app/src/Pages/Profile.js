@@ -30,9 +30,9 @@ export default function Profile() {
             </h1>
             <div className='section-content'>
                 {discData.map((disc, index) => {
-                    return ( <div key={index}>
-                        <p>{disc}</p>
-                    </div> );
+                    return (
+                        <div>{disc.name} </div>
+                    )
                 })}
             </div>
         </div>
