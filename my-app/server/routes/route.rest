@@ -1,13 +1,39 @@
+
+// get all users
 GET http://localhost:3001/users
 
 
 
 ###
+// get one user
+GET http://localhost:3001/users/6340dfd9e3d78e39086bee9b
 
+
+
+###
+// create user
 POST http://localhost:3001/users
 Content-Type: application/json
 
 { 
-    "name": "Ryan",
+    "name": "James",
     "password": "password"
 }
+
+
+
+###
+// update user
+PATCH http://localhost:3001/users/6340eeecaa7c19c62560eaa5
+Content-Type: application/json
+
+{ 
+    "name": "jake",
+    "password": "password123"
+}
+
+
+
+###
+// delete user
+DELETE  http://localhost:3001/users/6340eed41eba0b1b97cb673f
