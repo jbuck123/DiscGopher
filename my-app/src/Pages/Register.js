@@ -31,8 +31,8 @@ export default function Signup() {
       });
  
       const resJson = await res.json();
-      console.log(...resJson)
-      if (res.status === 200) {
+      console.log(resJson)
+      if (res.status === 201) {
         setUsername("");
         
         setMessage(" User was created successfully")
