@@ -8,19 +8,11 @@ import Putter from "../images/Putter.png";
 
 export default function HomePage() {
 
-  const [data, setData] = React.useState(null);
+  
 
-  React.useEffect(() => {
-    fetch("/api")
-      .then((res) => res.json())
-      .then((data) => setData(data.message));
-  }, []);
+
   return (
     <div className="pageContent">
-
-      <div>
-        <p>{!data ? "....Loading" : data}</p>
-      </div>
       <div className="section-bg-armyGreen">
         <h1 className="section-title"> DiscGopher</h1>
         <div className="flex-container">

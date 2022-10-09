@@ -16,7 +16,7 @@ POST http://localhost:3001/users
 Content-Type: application/json
 
 { 
-    "name": "James",
+    "name": "Brandon",
     "password": "password"
 }
 
@@ -28,7 +28,7 @@ PATCH http://localhost:3001/users/6340eeecaa7c19c62560eaa5
 Content-Type: application/json
 
 { 
-    "name": "jake",
+    "name": "Jacob",
     "password": "password123"
 }
 
