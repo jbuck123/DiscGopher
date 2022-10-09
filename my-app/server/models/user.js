@@ -5,11 +5,11 @@ SALT_FACTORY = 10;
 const UserSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true
+        // required: true
     },
     password: {
         type: String,
-        required: true
+        // required: true
     },
     // date_created: {
     //     type: Date,
@@ -20,6 +20,7 @@ const UserSchema = new mongoose.Schema({
 
 UserSchema.pre("save", function (next) {
     const user = this
+    console.log(user)
         // only hashes passwords that are new or being modified.
     if (this.isModified("password") || this.isNew) {
         bcrypt.genSalt(10, function(saltError, salt) {
