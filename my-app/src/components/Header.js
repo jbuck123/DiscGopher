@@ -1,5 +1,6 @@
 
 import * as React from 'react';
+import {Link} from 'react-router-dom'
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -15,8 +16,11 @@ import MenuItem from '@mui/material/MenuItem';
 
 import ForestIcon from '@mui/icons-material/Forest';
 
-const pages = ['Discs', 'Bag'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const pages = ['Discs', 'Bags'];
+// const settings = [
+//   { route: '/Login', text: 'Login'},
+//   {route: '/Register', text: 'Register'}
+// ];
 
 
 
@@ -156,11 +160,15 @@ const ResponsiveAppBar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
+              <Link to='/Login' style={{ textDecoration: 'none' }}>
+                <MenuItem> Login</MenuItem>
+              </Link>
+              <Link to='/Register' style={{ textDecoration: 'none' }}>
+                <MenuItem> Register</MenuItem>
+              </Link>
+              <Link to='/Profile' style={{ textDecoration: 'none' }}>
+                <MenuItem> Profile</MenuItem>
+              </Link>
             </Menu>
           </Box>
         </Toolbar>
