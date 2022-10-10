@@ -67,8 +67,42 @@ app.post("/register", async (req,res) => {
    }
 })
 
-app.post("login", (req,res) => {
-    // logic will go here
+    // login rout will: 
+            // get user input, Validate user input , validate if the suer exists, very user password , create a signed JWT token
+
+app.post("/login", async (req,res) => {
+    try {
+        const { name, password } = req.body;
+
+        //validate user 
+
+        if (!(name && password)) {
+            // user error
+            res.status(400).send("All input is required");
+        }
+        // validate if the user is in the database 
+        const user = await User.findOne({ name });
+
+        if(user && ( await bcrypt.compare(password, user.password))){
+            console.log('bcrypt compare is hittin')
+            const token = jwt.sign(
+                {user_id: user._id, name},
+                process.env.TOKEN_KEY,
+                {
+                    expiresIn: '2h'
+                }
+            );
+            //save user token
+            user.token = token;
+
+            // send user // 200 error means success!
+            res.status(200).json(user)
+        }
+        // else // invalid login
+        res.status(400).send("invlaid credentials")
+    } catch (error) {
+        console.log(error)
+    }
 })
 
 
