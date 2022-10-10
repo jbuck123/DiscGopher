@@ -26,6 +26,10 @@ import Forehand from "./Pages/Forehand"
 import Tomahawk from "./Pages/Tomahawk"
 
 
+
+
+
+
 function App() {
   return (
     <div>
