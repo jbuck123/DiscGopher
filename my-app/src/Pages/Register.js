@@ -2,10 +2,15 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
+
 export default function Signup() {
   // states for registration
   const [username, setUsername] = useState("");
   const [password, setPasswword] = useState("");
+
+  // states for checking the errors
+  const [submitted, setSubmitted] = useState(false)
+  const [error, setError] = useState(false)
 
   // states for checking errors
   const [message, setMessage] = useState("");
@@ -31,21 +36,54 @@ export default function Signup() {
       });
  
       const resJson = await res.json();
-      console.log(resJson)
+      
       if (res.status === 201) {
         setUsername("");
         
         setMessage(" User was created successfully")
+        setSubmitted(true)
       } else {
         setMessage( "an error has occured")
+        setError(true)
       }
     } catch (error) {
       console.log(error)
     }
-  }
+  } 
+
+  // Showing success message
+  const successMessage = () => {
+    return (
+      <div
+        className="success"
+        style={{
+          display: submitted ? '' : 'none',
+        }}>
+        <h1>User {username} successfully registered!</h1>
+      </div>
+    );
+  };
+
+  // Showing error messages if error is set to true
+  const errorMessage = () => {
+    return (
+      <div
+        className="error"
+        style={{
+          display: error ? '' : 'none',
+        }}>
+        <h1>Please enter all the fields</h1>
+      </div>
+    );
+  };
+
   return (
     <div className="auth-form">
       <h1 className="section-title">Register</h1>
+      <div className="messages">
+        {errorMessage()}
+        {successMessage()}
+      </div>
       <form onSubmit={handleSubmit} className="section-form">
         <input
           value={username}
@@ -60,7 +98,6 @@ export default function Signup() {
           className="section-input"
         ></input>
         <button type="submit"> Submit</button>
-      <div className="message">{message ? <p>{message}</p> : null}</div>
       </form>
       <div className="section-content">
         <p>Already Have an account?</p>
