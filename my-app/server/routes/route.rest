@@ -12,11 +12,11 @@ GET http://localhost:3001/users/6340dfd9e3d78e39086bee9b
 
 ###
 // create user
-POST http://localhost:3001/users
+POST http://localhost:3001/register
 Content-Type: application/json
 
 { 
-    "name": "Brandon",
+    "name": "Josie",
     "password": "password"
 }
 

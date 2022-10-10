@@ -5,17 +5,15 @@ SALT_FACTORY = 10;
 const UserSchema = new mongoose.Schema({
     name: {
         type: String,
+        default: null
         // required: true
     },
     password: {
         type: String,
         // required: true
     },
-    // date_created: {
-    //     type: Date,
-    //     required: true,
-    //     defualt: Date.now
-    // }
+    token: { type: String},
+
 })
 
 UserSchema.pre("save", function (next) {
