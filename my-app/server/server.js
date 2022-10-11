@@ -100,7 +100,7 @@ app.post("/login", async (req,res) => {
                maxAge: 60*60*24*1000,
                HttpOnly: true
            })
-           res.json("logged in")
+           res.json(user)
        }
    })
 
