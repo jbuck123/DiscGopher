@@ -11,12 +11,12 @@ GET http://localhost:3001/users/6340dfd9e3d78e39086bee9b
 
 
 ###
-// create user
+// Register user
 POST http://localhost:3001/register
 Content-Type: application/json
 
 { 
-    "name": "Betty",
+    "name": "Daisy",
     "password": "password"
 }
 
@@ -31,7 +31,6 @@ Content-Type: application/json
     "name": "Betty",
     "password": "password"
 }
-
 
 
 

@@ -2,7 +2,12 @@ const express = require('express')
 const mongoose = require('mongoose')
 require("dotenv").config()
 const User = require("./models/user")
+
+const cookieParser = require("cookie-parser");
 var jwt = require('jsonwebtoken');
+const {createToken, verifyToken} = require("./middleware/auth")
+const bcrypt = require('bcrypt')
+
 
 mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true})
 const db = mongoose.connection
@@ -14,8 +19,11 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 
 app.use(express.json())
+app.use(cookieParser())
 
-const UserRouter = require("./routes/login")
+
+const UserRouter = require("./routes/login");
+const { validate } = require('./models/user');
 
 app.use('/users', UserRouter)
 // localhost:3001/users
@@ -71,38 +79,37 @@ app.post("/register", async (req,res) => {
             // get user input, Validate user input , validate if the suer exists, very user password , create a signed JWT token
 
 app.post("/login", async (req,res) => {
-    try {
-        const { name, password } = req.body;
+   const { name , password } = req.body;
 
-        //validate user 
+   const user = await User.findOne({ name })
 
-        if (!(name && password)) {
-            // user error
-            res.status(400).send("All input is required");
-        }
-        // validate if the user is in the database 
-        const user = await User.findOne({ name });
+   if (!user) res.status(400).json({ error: "user doesnt exist "});
 
-        if(user && ( await bcrypt.compare(password, user.password))){
-            console.log('bcrypt compare is hittin')
-            const token = jwt.sign(
-                {user_id: user._id, name},
-                process.env.TOKEN_KEY,
-                {
-                    expiresIn: '2h'
-                }
-            );
-            //save user token
-            user.token = token;
+   const dbPassword = user.password;
+   bcrypt.compare(password, dbPassword).then((match) => {
+       if(!match) {
+           res.status(400).json({ error: "wrong username and password combination"})
+       } else {
+           const accesToken = createToken(user)
 
-            // send user // 200 error means success!
-            res.status(200).json(user)
-        }
-        // else // invalid login
-        res.status(400).send("invlaid credentials")
-    } catch (error) {
-        console.log(error)
-    }
+           // storing token in the browser
+
+           res.cookie("access-token", accesToken, {
+               // expiration date
+               // this is in milliseconds, so I 
+               maxAge: 60*60*24*1000,
+               HttpOnly: true
+           })
+           res.json("logged in")
+       }
+   })
+
+})
+
+// welcome route
+
+app.get("/profile" , verifyToken,  (req, res) => {
+    res.json("proflie")
 })
 
 
