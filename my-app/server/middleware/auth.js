@@ -11,10 +11,14 @@ if (!accessToken)
 return res.status(400).json( { error: "user not authenticated"});
 
 try {
+       // comparing two tokens 
     const validToken = verify(accessToken, process.env.TOKEN_KEY )
     if (validToken) {
         req.authenticated = true
-        return next()
+        console.log(validToken)
+        res.validToken = validToken
+        next()
+        
     }
 } catch (error) {
     console.log(error)
@@ -23,6 +27,8 @@ try {
 
 
 const createToken = (user) => {
+        // accepting user as a prop and creating an access token.
+        
     const accessToken = sign({ name: user.name, id: user.id}, process.env.TOKEN_KEY);
     return accessToken
 }

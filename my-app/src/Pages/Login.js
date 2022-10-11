@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export default function Login() {
   // setting states
@@ -36,10 +36,11 @@ export default function Login() {
 
       const resJson = await response.json();
       console.log(resJson);
-      if (response.status === 201) {
+      if (response.status === 200) {
         setName("");
         setMessage(" Logged in seccessfully");
         setSubmitted(true);
+        setError(false)
       } else {
         setMessage(" an error has occured");
         setError(true);
@@ -58,7 +59,7 @@ export default function Login() {
           display: submitted ? "" : "none",
         }}
       >
-        <h1>User {name} successfully registered!</h1>
+        <h1>User {name} successfully logged  in!</h1>
       </div>
     );
   };

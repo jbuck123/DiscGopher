@@ -35,6 +35,12 @@ Content-Type: application/json
 
 
 ###
+// user profile
+// get one user
+GET http://localhost:3001/profile
+
+
+###
 // update user
 PATCH http://localhost:3001/users/6340eeecaa7c19c62560eaa5
 Content-Type: application/json

@@ -108,8 +108,15 @@ app.post("/login", async (req,res) => {
 
 // welcome route
 
-app.get("/profile" , verifyToken,  (req, res) => {
-    res.json("proflie")
+app.get("/profile" , verifyToken, async (req, res) => {
+   try {
+       // needed to wait for verifyToken to run its thing before getting validatToke
+       // that is why i was getting { object, Object }
+    validatedUser = await res.validToken
+    res.json(validatedUser)
+   } catch (error) {
+    res.status(500).json({message: error.message})
+   }
 })
 
 
