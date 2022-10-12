@@ -41,6 +41,7 @@ export default function Login() {
         setMessage(" Logged in seccessfully");
         setSubmitted(true);
         setError(false)
+        window.location.assign("/")
       } else {
         setMessage(" an error has occured");
         setError(true);

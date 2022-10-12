@@ -1,12 +1,13 @@
 import axios from 'axios'
 
 
-export const logout = () => async (dispatch) => {
+ const Logout = () => {
   try {
-      await axios.get('/logout')
-      localStorage.removeItem('access-token')
-
+       axios.get('/api/auth/logout')
+      localStorage.removeItem('userInfo')
+  
   } catch (error) {
       console.log(error)
   }
 }
+export default Logout;

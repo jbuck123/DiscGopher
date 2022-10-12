@@ -35,6 +35,7 @@ console.log(props)
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -51,6 +52,12 @@ console.log(props)
     setAnchorElUser(null);
   };
 
+  const handleClick  = ( event ) => {
+    
+     fetch ("/logout").then((res) => res.json()).then((data) => console.log(data))
+     window.location.assign('/')
+  }
+
   return (
 
 
@@ -58,7 +65,7 @@ console.log(props)
       bgcolor: 'rgb(255,204,51)'
     }} >
       {props.user ? (
-          <Link to="/Logout">Log Out</Link>
+          <button onClick={handleClick}> Logout </button>
       ) : (
 
       <Container maxWidth="xl"

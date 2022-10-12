@@ -124,7 +124,7 @@ app.get("/profile" , verifyToken, async (req, res) => {
 
 app.get("/logout", async ( req, res) => {
     // set up token to expire after 5 seconds
-    res.cookie('token', 'none', {
+    res.cookie('access-token', 'none', {
         expires: new Date(Date.now() + 5 * 1000),
         httpOnly: true,
     })
