@@ -36,8 +36,13 @@ Content-Type: application/json
 
 ###
 // user profile
-// get one user
 GET http://localhost:3001/profile
+
+
+
+###
+// logout user
+GET http://localhost:3001/logout
 
 
 ###

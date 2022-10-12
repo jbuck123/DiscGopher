@@ -16,6 +16,8 @@ import MenuItem from '@mui/material/MenuItem';
 
 import ForestIcon from '@mui/icons-material/Forest';
 
+
+
 const pages = ['Discs', 'Bags'];
 // const settings = [
 //   { route: '/Login', text: 'Login'},
@@ -26,7 +28,11 @@ const pages = ['Discs', 'Bags'];
 
 
 
-const ResponsiveAppBar = () => {
+const ResponsiveAppBar = (props) => {
+
+
+console.log(props)
+
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -46,9 +52,15 @@ const ResponsiveAppBar = () => {
   };
 
   return (
+
+
     <AppBar position="static" sx={{
       bgcolor: 'rgb(255,204,51)'
     }} >
+      {props.user ? (
+          <Link to="/Logout">Log Out</Link>
+      ) : (
+
       <Container maxWidth="xl"
     >
         <Toolbar disableGutters>
@@ -173,6 +185,7 @@ const ResponsiveAppBar = () => {
           </Box>
         </Toolbar>
       </Container>
+      )}
     </AppBar>
   );
 };

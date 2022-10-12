@@ -106,7 +106,7 @@ app.post("/login", async (req,res) => {
 
 })
 
-// welcome route
+// auth route
 
 app.get("/profile" , verifyToken, async (req, res) => {
    try {
@@ -117,6 +117,18 @@ app.get("/profile" , verifyToken, async (req, res) => {
    } catch (error) {
     res.status(500).json({message: error.message})
    }
+})
+
+
+// logout 
+
+app.get("/logout", async ( req, res) => {
+    // set up token to expire after 5 seconds
+    res.cookie('token', 'none', {
+        expires: new Date(Date.now() + 5 * 1000),
+        httpOnly: true,
+    })
+    res.status(200).json({success:true, message: "user logged out"})
 })
 
 

@@ -3,8 +3,10 @@
 // default junk 
 
 import * as React from 'react';
-import Button from '@mui/material/Button';
+import { useEffect, useState } from 'react'
 
+
+import Logout from './utils/Logout';
 
 import { Routes, Route } from "react-router-dom"
 
@@ -27,13 +29,19 @@ import Tomahawk from "./Pages/Tomahawk"
 
 
 
-
-
-
 function App() {
+const [ user, setUser ] = useState(null)
+
+const isLoggedIn = ( ) => {
+  return fetch ("/profile").then((res) => res.json()).then((data) => setUser(data))
+}
+useEffect(() => {
+isLoggedIn();
+ 
+}, [])
   return (
     <div>
-      <Header />
+      <Header user = { user }  />
       <Routes>
         <Route path='/' element={ <HomePage />}></Route>
         <Route path='/Scoring' element={ <Scoring />}></Route>
@@ -45,6 +53,7 @@ function App() {
         <Route path='/Tomahawk' element={ <Tomahawk />}></Route>
         <Route path='/Login' element={ <Login />}></Route>
         <Route path='/Register' element={ <Register />}></Route>
+        <Route path='/Logout' element={ <Logout />}></Route>
         <Route path= '/Profile' element={ <Profile /> }></Route>
       </Routes>
     </div>
