@@ -2,9 +2,8 @@ const express = require("express");
 
 const UserRouter = express.Router();
 const User = require("../models/user");
-
-
-
+const upload = require("../middleware/upload");
+const { Router } = require("express");
 
 
 // get all the users
@@ -80,4 +79,8 @@ async function getUser(req, res, next) {
     res.user = user
     next()
 }
+
+
+
+
 module.exports = UserRouter;
