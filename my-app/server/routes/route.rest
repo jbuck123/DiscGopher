@@ -1,4 +1,11 @@
 
+
+
+GET http://localhost:3001/disc
+
+
+
+###
 // get all users
 GET http://localhost:3001/users
 

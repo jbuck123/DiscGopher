@@ -19,6 +19,8 @@ const UserSchema = new mongoose.Schema({
 
 })
 
+
+
 UserSchema.pre("save", function (next) {
     const user = this
     console.log(user)
@@ -45,6 +47,9 @@ UserSchema.pre("save", function (next) {
         return next()
     }
 })
+
+
+
 
 
 module.exports = mongoose.model("User", UserSchema)

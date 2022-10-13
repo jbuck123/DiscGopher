@@ -2,6 +2,9 @@ const express = require('express')
 const mongoose = require('mongoose')
 require("dotenv").config()
 const User = require("./models/user")
+const Disc = require("./models/disc")
+
+const MongoClient = require("mongodb").MongoClient;
 
 const cookieParser = require("cookie-parser");
 var jwt = require('jsonwebtoken');
@@ -9,6 +12,8 @@ const {createToken, verifyToken} = require("./middleware/auth")
 const bcrypt = require('bcrypt')
 const fs = require("fs");
 const { parse } = require("csv-parse");
+
+const { seedDB } = require("../server/seed/seeder")
 
 
 
@@ -24,16 +29,22 @@ const app = express();
 app.use(express.json())
 app.use(cookieParser())
 
-
+const DiscRouter = require("./routes/disc")
 const UserRouter = require("./routes/login");
-const { validate } = require('./models/user');
+
 
 app.use('/users', UserRouter)
+app.use('/discs', DiscRouter)
+
 
 // localhost:3001/users
 
+// seeder
+
+
 // csv parser
 const data = []
+data.forEach((item) => db.Disc.insert(item))
 
 fs.createReadStream("./seed/pdga-approved-disc-golf-discs_2022-10-13T00-30-12 (1).csv") 
 .pipe(parse({ 
@@ -56,6 +67,9 @@ fs.createReadStream("./seed/pdga-approved-disc-golf-discs_2022-10-13T00-30-12 (1
 
 // lets auth users in here i guess
 // register 
+
+
+
 app.post("/register", async (req,res) => {
    try {
        const { name, password} = req.body;

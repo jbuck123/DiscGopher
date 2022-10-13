@@ -1,4 +1,4 @@
-"Manufacturer / Distributor","Disc Model","Max Weight (gr)","Diameter (cm)","Height (cm)","Rim Depth (cm)","Inside Rim Diameter (cm)","Rim Thickness (cm)","Rim Depth / Diameter Ratio (%)","Rim Configuration","Flexibility (kg)","Class","Max Weight Vint (gr)","Last Year Production","Certification Number","Approved Date"
+"Manufacturer","discModel","maxWeight","Diameter","Height","RimDepth","InsideRimDiameter","RimThickness","RimDepth_DiameteRatio","RimConfiguration","Flexibility","Class","MaxWeightVint","LastYearProduction","CertificationNumber","ApprovedDate"
 "Infinite Discs","Czar","175.1","21.1","1.7","1.2","16.7","2.2","5.7","33.25","9.77","","","","22-174","Oct 10, 2022"
 "Birdie","Weapon","175.1","21.1","1.4","1.1","17.5","1.9","5.2","43.00","9.89","","","","22-173","Oct 10, 2022"
 "Crown Me (Sunny Sporting Co. Ltd)","Be Wild and Free-Mid Range","175.1","21.1","1.9","1.6","18.9","1.1","7.6","60.00","9.77","","","","22-172","Oct 4, 2022"
