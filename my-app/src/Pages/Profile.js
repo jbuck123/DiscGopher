@@ -16,11 +16,10 @@ useEffect(() => {
   getUser();
 }, [])
   return (
-    <div>
-      <h1>
-        {name}
-      </h1>
-    </div>
+   <div className='section-bg-armyGreen' >
+     <h2 className='section-title'>{name}</h2>
+     <p className='section-content'> </p>
+   </div>
   )
     
   } 

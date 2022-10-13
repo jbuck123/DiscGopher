@@ -12,6 +12,12 @@ const UserSchema = new mongoose.Schema({
         type: String,
         // required: true
     },
+    disc: {
+        type: String
+    },
+    profilePicture: {
+        type: Image,
+    },
     token: { type: String},
 
 })
