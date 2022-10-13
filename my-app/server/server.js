@@ -2,24 +2,20 @@ const express = require('express')
 const mongoose = require('mongoose')
 require("dotenv").config()
 const User = require("./models/user")
-const Grid = require("gridfs-stream");
 
 const cookieParser = require("cookie-parser");
 var jwt = require('jsonwebtoken');
 const {createToken, verifyToken} = require("./middleware/auth")
 const bcrypt = require('bcrypt')
+const fs = require("fs");
+const { parse } = require("csv-parse");
 
 
-let gfs; 
-connection()
 
 mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true})
 const db = mongoose.connection
 db.on('error', (error) => console.error(error))
-db.once("open", function () {
-    gfs = Grid(conn.db, mongoose.mongo);
-    gfs.collection("photos");
-});
+db.once('open', () => console.log("connected to Database"))
 
 const PORT = process.env.PORT || 3001;
 
@@ -28,36 +24,34 @@ const app = express();
 app.use(express.json())
 app.use(cookieParser())
 
-const upload = require("./routes/upload");
+
 const UserRouter = require("./routes/login");
 const { validate } = require('./models/user');
 
 app.use('/users', UserRouter)
-app.use("/file", upload);
+
 // localhost:3001/users
 
+// csv parser
+const data = []
 
-// media routes 
-app.get("/file/:filename", async (req, res) => {
-    try {
-        const file = await gfs.files.findOne({ filename: req.params.filename});
-        const readStream = gfs.createReadStream(file.filename);
-        readStream.pipe(res);
-    } catch (error) {
-        res.send("not found");
-    }
-});
-
-app.delete("/file/:filename", async (req, res) => {
-    try {
-        await gfs.files.deleteOne({ filename: req.params.filename });
-        res.send("success")
-    } catch (error) {
-        console.log(error)
-        res.send(" An error occured ")
-    }
+fs.createReadStream("./seed/pdga-approved-disc-golf-discs_2022-10-13T00-30-12 (1).csv") 
+.pipe(parse({ 
+    delimiter: ",",
+    columns: true,
+    ltrim: true
+}))
+.on("data", function (row) {
+   data.push(row)
+    // The .on("data") event is where each row in your CSV file will be read.
 })
-
+.on("error", function (error) {
+    console.log(error.message);
+})
+.on("end", function() {
+    console.log("finished");
+    console.log(data)
+})
 
 
 // lets auth users in here i guess

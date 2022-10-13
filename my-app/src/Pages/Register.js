@@ -22,7 +22,7 @@ export default function Signup() {
     console.log(password)
     event.preventDefault();
     try {
-      let res = await fetch("/users", {
+      let res = await fetch("/register", {
         method: "POST",
         // also it wont work with out headers, you need to tell fetch that youre sending json
         headers: {

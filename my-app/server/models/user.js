@@ -15,9 +15,6 @@ const UserSchema = new mongoose.Schema({
     disc: {
         type: String
     },
-    profilePicture: {
-        type: Image,
-    },
     token: { type: String},
 
 })
