@@ -29,6 +29,23 @@ code {
 .pageContent {
   padding: 20px;
 }
+.profile-page { 
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+.container-left {
+  left: 1;
+  background-color: #111;
+}
+.container-right {
+  right: 1;
+  background-color: red;
+}
 .section-bg-armyGreen {
   background-color: rgb(255,204,51);
   display: block;
@@ -39,10 +56,6 @@ code {
   font: inherit;
   border-radius: 5% 5% 5% 5%; /* Important part */
   box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.5)
- 
-
- 
- 
 }
 .section-title {
   color: rgb(122, 0 ,25);
@@ -77,6 +90,20 @@ code {
   padding: 30px;
 }
 
+
+.parent{
+  border: 1px solid black;
+  margin: 1rem;
+  padding: 2rem 2rem;
+  text-align: center;
+  background-color: aqua;
+}
+.child{
+  display: inline-block;
+  border: 1px solid red;
+  padding: 1rem 1rem;
+  vertical-align: middle;
+}
 /* 
 ///////////////////////
 /* NAV BAR STYLING  */

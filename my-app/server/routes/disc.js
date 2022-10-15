@@ -24,7 +24,6 @@ DiscRouter.get("/:disc", async (req, res) => {
 
 
 
-
 DiscRouter.get("/innova", async (req , res) => {
     try {
         const discs = await Disc.find({ manufacturer: "Innova" });

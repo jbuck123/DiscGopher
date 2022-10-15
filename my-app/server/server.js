@@ -188,6 +188,14 @@ app.get("/logout", async ( req, res) => {
 
 
 
+
+app.post('/search', async (req, res) => {
+    const { name } = req.body;
+    const result = await Disc.find({name})
+     res.send(result)
+ })
+
+
 app.listen(PORT, () => {
     console.log(` Server listening on ${PORT}`);
 });
