@@ -1,7 +1,9 @@
+GET http://localhost:3001/discs/Destroyer
 
 
 
-GET http://localhost:3001/disc
+###
+GET http://localhost:3001/discs
 
 
 
@@ -23,7 +25,7 @@ POST http://localhost:3001/register
 Content-Type: application/json
 
 { 
-    "name": "Norton",
+    "name": "Maddy",
     "password": "password"
 }
 

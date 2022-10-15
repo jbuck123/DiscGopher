@@ -4,54 +4,44 @@ const DiscSchema = new mongoose.Schema({
     manufacturer: {
         type: String
     },
-    discModel: {
+    name: {
         type: String
     },
-    maxWeight: {
+    speed: {
         type: Number
     },
-    Diameter: {
+    glide: {
         type: Number
     },
-
-    Height: {
+    turn: {
         type: Number
     },
-
-    RimDepth: {
+    fade: {
         type: Number
     },
-    InsideRimDiameter: {
+    stability: {
         type: Number
     },
-    RimThickness: {
-        type: Number
-    },
-    RimDepth_DiameteRatio: {
-        type: Number
-    },
-    RimConfiguration: {
-        type: Number
-    },
-    Flexibility: {
-        type: Number
-    },
-    Class: {
+    diameter: {
         type: String
     },
-    MaxWeightVint: {
-        type: Number
-    },
-    LastYearProduction: {
-        type: Date
-    },
-    CertificationNumber: {
+
+    height: {
         type: String
     },
-    ApprovedDate: {
-        type: Date
-    },
 
+    rim_depth: {
+        type: String
+    },
+    rim_width: {
+        type: String
+    },
+    bead: {
+        type: String
+    },
+    link: {
+        type: String
+    },
 
 
 })

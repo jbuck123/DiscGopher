@@ -4,7 +4,7 @@ require("dotenv").config()
 const User = require("./models/user")
 const Disc = require("./models/disc")
 
-const MongoClient = require("mongodb").MongoClient;
+
 
 const cookieParser = require("cookie-parser");
 var jwt = require('jsonwebtoken');
@@ -13,11 +13,12 @@ const bcrypt = require('bcrypt')
 const fs = require("fs");
 const { parse } = require("csv-parse");
 
-const { seedDB } = require("../server/seed/seeder")
 
 
 
-mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true})
+
+mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true,
+    useUnifiedTopology: true})
 const db = mongoose.connection
 db.on('error', (error) => console.error(error))
 db.once('open', () => console.log("connected to Database"))
@@ -44,25 +45,40 @@ app.use('/discs', DiscRouter)
 
 // csv parser
 const data = []
-data.forEach((item) => db.Disc.insert(item))
 
-fs.createReadStream("./seed/pdga-approved-disc-golf-discs_2022-10-13T00-30-12 (1).csv") 
-.pipe(parse({ 
-    delimiter: ",",
-    columns: true,
-    ltrim: true
-}))
-.on("data", function (row) {
-   data.push(row)
-    // The .on("data") event is where each row in your CSV file will be read.
-})
-.on("error", function (error) {
-    console.log(error.message);
-})
-.on("end", function() {
-    console.log("finished");
-    console.log(data)
-})
+
+
+    //  fs.createReadStream("./seed/Discs.csv") 
+    //  .pipe(parse({ 
+    //      delimiter: ",",
+    //      columns: true,
+    //      ltrim: true
+    //  }))
+    //  .on("data", function (row) {
+    //     data.push(row)
+    //      // The .on("data") event is where each row in your CSV file will be read.
+    //  })
+    //  .on("error", function (error) {
+    //      console.log(error.message);
+    //  })
+    //  .on("end", function() {
+    //      console.log("finished");
+    //      Disc.insertMany( data , function(error, doc) {
+    //           if(error) {
+    //              console.log(error);
+    //           } else {
+    //              console.log(data)   
+    //              console.log('success');
+    //           }
+            
+    //       });
+    //     //  console.log(data)
+    //  })
+ 
+
+
+
+
 
 
 // lets auth users in here i guess
