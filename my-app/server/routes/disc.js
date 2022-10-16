@@ -5,6 +5,11 @@ const Disc = require("../models/disc");
 
 
 
+
+
+// add disc to user
+
+
 DiscRouter.get("/", async (req , res) => {
     try {
         const discs = await Disc.find();

@@ -188,12 +188,16 @@ app.get("/logout", async ( req, res) => {
 
 
 
-
+// search for disc
 app.post('/search', async (req, res) => {
     const { name } = req.body;
     const result = await Disc.find({name})
      res.send(result)
  })
+
+ // add discs to user model
+
+ 
 
 
 app.listen(PORT, () => {

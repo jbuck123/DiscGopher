@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const User = require("./user")
 
 const DiscSchema = new mongoose.Schema({
     manufacturer: {
@@ -42,7 +43,8 @@ const DiscSchema = new mongoose.Schema({
     link: {
         type: String
     },
-
-
+    user: { 
+        
+    }
 })
 module.exports = mongoose.model("Disc", DiscSchema)

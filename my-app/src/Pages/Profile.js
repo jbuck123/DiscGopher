@@ -1,89 +1,120 @@
+import React from "react";
+import { useState, useEffect } from "react";
+import BackpackIcon from "@mui/icons-material/Backpack";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import DiscDisplay from "../components/DiscDisplay";
+
+export default function Profile() {
+  const [name, setName] = useState("");
+  const [search, setSearch] = useState("");
+  const [searchResults, setSearchResults] = useState("");
 
 
-import  React from 'react';
-import { useState, useEffect } from 'react'
-import BackpackIcon from '@mui/icons-material/Backpack';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-export default function SimpleAccordion() {
-  const [ name, setName] = useState("")
-  const [ search, setSearch] = useState("")
+  const [error, setError] = useState(false);
+
+
+  const [message, setMessage] = useState("");
+
+  const getUser = () => {
+    return fetch("/profile")
+      .then((res) => res.json())
+      .then((data) => setName(data.name));
+  };
 
 
 
-
-  const getUser = ( ) => {
-  return fetch("/profile").then((res) => res.json()).then((data) => setName(data.name));
-}
+  const handleSubmit = async (event) => {
 
 
-
-const handleSubmit = async (event) => {
-  console.log(search)
-  event.preventDefault();
-  try {
-    let response = await fetch("/search" , {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json"
-      },
-      body: JSON.stringify({
-        name: search,
-      }),
-    });
-    console.log(response)
-    const resJson = await response.json()
-    console.log(resJson)
-    if(response.status === 200) {
-      setSearch("")
-      console.log("respoonse successful!")
-    } 
-    else {
-      console.log("error")
+    event.preventDefault();
+    try {
+      let response = await fetch("/search", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          name: search,
+        }),
+      });
+      console.log(response)
+      const disc = await response.json();
+      console.log(disc);
+      if (disc.length == 0) {
+        setError(true)
+        console.log("error");
+        setSearchResults(null);
+      } 
+      
+      else {
+         setSearch("");
+         console.log("respoonse successful!");
+         setSearchResults(disc);
+          console.log(searchResults)
+         setError(false)
+       
+      }
+    } catch (error) {
+      console.log("fetch error");
     }
-  } catch (error) {
-    console.log(error);
-  }
+  };
+
+  useEffect(() => {
+    getUser();
+  }, []);
+const errorMessage = () => {
+  return(
+    <div className="error" style={{display: error ? "" : "none"} }>
+      <h1>Please enter valid disc name</h1>
+    </div>
+  )
 }
-useEffect(()=> {
-  getUser();
-}, []);
+
+
+
+
   return (
-    <div className='parent'>
-      <div className='child'>
-        <h1>Add discs to your bag</h1>
-        <form onSubmit={handleSubmit} className = "section-form">
-        <TextField value={search} onChange={(e) => setSearch(e.target.value)} id="outlined-basic" label="Search for disc..." variant="outlined" />
-        <Button type='submit' variant="contained">Search</Button>
-        </form>
+    <div className="parent">
+      <div className="messages">
+        {errorMessage()}
       </div>
-      <div className='child'>
+      <div className="child">
+        <h1>Add discs to your bag</h1>
+        <form onSubmit={handleSubmit} className="section-form">
+          <TextField
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            id="outlined-basic"
+            label="Search for disc..."
+            variant="outlined"
+          />
+          <Button type="submit" variant="contained">
+            Search
+          </Button>
+        </form>
+        <DiscDisplay {...searchResults} />
+      </div>
+      <div className="child">
         <h1>{name} bag </h1>
         <BackpackIcon />
       </div>
-      </div>
+    </div>
   );
 }
 
-
-
 // import React, {useEffect, useState} from 'react'
- 
-
-
-
 
 // export default function Profile() {
 //   const [ name, setName] = useState("")
 
 // const getUser = ( ) => {
 //   return fetch("/profile").then((res) => res.json()).then((data) => setName(data.name));
- 
+
 // }
 // useEffect(() => {
 //   getUser();
 // }, [])
 //   return
 
-    
-//   } 
+//   }

@@ -3,8 +3,20 @@ GET http://localhost:3001/discs/Destroyer
 
 
 ###
+// get all discs // slow response
 GET http://localhost:3001/discs
 
+
+
+###
+// add disc to user model
+PATCH http://localhost:3001/users/addDisc/6340f313ffcb2b530adf73d8
+Content-Type: application/json
+
+{
+  "manufacturer": "Innova",
+  "name": "Wraith"
+}
 
 
 ###
@@ -15,7 +27,7 @@ GET http://localhost:3001/users
 
 ###
 // get one user
-GET http://localhost:3001/users/6340dfd9e3d78e39086bee9b
+GET http://localhost:3001/users/6340eeecaa7c19c62560eaa5
 
 
 
@@ -69,3 +81,5 @@ Content-Type: application/json
 ###
 // delete user
 DELETE  http://localhost:3001/users/634230a32f8326f578945f41
+
+

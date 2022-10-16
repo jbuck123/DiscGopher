@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 bcrypt = require('bcrypt')
+
 SALT_FACTORY = 10;
 
 const UserSchema = new mongoose.Schema({
@@ -12,9 +13,14 @@ const UserSchema = new mongoose.Schema({
         type: String,
         // required: true
     },
-    disc: {
-        type: String
-    },
+    discBag: [{
+        manufacturer: {
+            type: String
+        },
+        name: {
+            type: String
+        }
+    }], 
     token: { type: String},
 
 })
