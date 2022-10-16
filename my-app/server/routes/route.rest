@@ -10,12 +10,12 @@ GET http://localhost:3001/discs
 
 ###
 // add disc to user model
-PATCH http://localhost:3001/users/addDisc/6340f313ffcb2b530adf73d8
+PATCH http://localhost:3001/users/addDisc/6344814771f5b76fe4b7c0ae
 Content-Type: application/json
 
 {
   "manufacturer": "Innova",
-  "name": "Destroyer"
+  "name": "Beast"
 }
 
 

@@ -32,7 +32,7 @@ const UserSchema = new mongoose.Schema({
   ],
   validate: {
     validator: function(v,x,y) {
-        return !(this.discBag.length > 3);
+        return !(this.discBag.length > 20);
     },
     message: props => `${props.value} exceeds maximum array size of 15`
 } },

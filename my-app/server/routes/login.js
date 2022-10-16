@@ -61,7 +61,7 @@ UserRouter.patch("/:id", getUser, async (req, res) => {
   }
 });
 
-// get user
+// add disc to user
 UserRouter.patch("/addDisc/:id", getUser, async (req, res) => {
   const user = res.user;
   console.log(user);
