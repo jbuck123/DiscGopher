@@ -4,9 +4,10 @@ import BackpackIcon from "@mui/icons-material/Backpack";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import DiscDisplay from "../components/DiscDisplay";
+import DiscBag from "../components/DiscBag";
 
 export default function Profile() {
-  const [name, setName] = useState("");
+  const [loggedUser, setLoggedUser] = useState("");
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState("");
 
@@ -19,7 +20,7 @@ export default function Profile() {
   const getUser = () => {
     return fetch("/profile")
       .then((res) => res.json())
-      .then((data) => setName(data.name));
+      .then((data) => setLoggedUser(data));
   };
 
 
@@ -49,14 +50,14 @@ export default function Profile() {
       
       else {
          setSearch("");
-         console.log("respoonse successful!");
+        //  console.log("respoonse successful!");
          setSearchResults(disc);
-          console.log(searchResults)
+          
          setError(false)
        
       }
     } catch (error) {
-      console.log("fetch error");
+      // console.log("fetch error");
     }
   };
 
@@ -95,10 +96,7 @@ const errorMessage = () => {
         </form>
         <DiscDisplay {...searchResults} />
       </div>
-      <div className="child">
-        <h1>{name} bag </h1>
-        <BackpackIcon />
-      </div>
+      <DiscBag user={{user: loggedUser}} /> 
     </div>
   );
 }

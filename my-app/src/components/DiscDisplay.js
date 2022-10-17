@@ -9,7 +9,7 @@ const [ loggedUser , setLoggedUser] = useState("")
 const [ name, setName] = useState('')
 const [ manufacturer, setManufacturer] = useState('')
 
-console.log(loggedUser)
+// console.log(loggedUser.id)
 
   const handleAdd = async (event) => { 
     setName(props[0].name)
@@ -18,7 +18,7 @@ console.log(loggedUser)
       console.log(" handle add hittin")
       try {
        
-        let res = await fetch ("/users/addDisc/6344814771f5b76fe4b7c0ae" , {
+        let res = await fetch (`/users/addDisc/${loggedUser.id}` , {
           method: "PATCH", 
           headers: {
             "Content-type": "application/json",
@@ -30,6 +30,7 @@ console.log(loggedUser)
         });
         console.log(res)
         const disc = await res.json();
+        
         console.log(disc)
       } catch (error) {
         

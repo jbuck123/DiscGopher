@@ -74,7 +74,7 @@ export default function Login() {
           display: error ? "" : "none",
         }}
       >
-        <h1>Please enter all the fields</h1>
+        <h1>Incorrect username or password</h1>
       </div>
     );
   };

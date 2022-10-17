@@ -27,7 +27,7 @@ GET http://localhost:3001/users
 
 ###
 // get one user
-GET http://localhost:3001/users/6340eeecaa7c19c62560eaa5
+GET http://localhost:3001/users/6344814771f5b76fe4b7c0ae
 
 
 
